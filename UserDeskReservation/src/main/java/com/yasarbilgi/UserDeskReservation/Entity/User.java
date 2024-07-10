@@ -44,11 +44,15 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
 
-    public User(Long id, String firstName, String lastName, String email, String password) {
+    public User(Long id, String firstName, String lastName, String email, String password,
+                Company company, Department department, UserRole userRole) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.company = company;
+        this.department = department;
+        this.userRole = userRole;
     }
 }
