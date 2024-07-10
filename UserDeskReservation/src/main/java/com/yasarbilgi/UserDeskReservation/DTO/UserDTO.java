@@ -13,4 +13,7 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String password;
+    private Long companyId;
+    private Long departmentId;
+    private Long userRoleId;
 }
