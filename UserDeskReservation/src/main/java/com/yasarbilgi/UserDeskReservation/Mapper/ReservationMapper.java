@@ -11,7 +11,6 @@ public class ReservationMapper {
                 reservation.getDesk().getId(),
                 reservation.getUser().getId(),
                 reservation.getReservationDate()
-                // Add mappings for user and desk as needed
         );
     }
 
@@ -19,7 +18,6 @@ public class ReservationMapper {
         Reservation reservation = new Reservation();
         reservation.setId(reservationDTO.getId());
         reservation.setReservationDate(reservationDTO.getReservationDate());
-        // Set user and desk based on DTO
         return reservation;
     }
 }
