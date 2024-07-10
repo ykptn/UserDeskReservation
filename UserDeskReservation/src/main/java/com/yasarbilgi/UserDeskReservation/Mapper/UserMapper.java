@@ -14,19 +14,40 @@ public class UserMapper {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
-                user.getPassword()
-                // Add mappings for company, department, userRole as needed
+                user.getPassword(),
+                user.getCompany() != null ? user.getCompany().getId() : null,
+                user.getDepartment() != null ? user.getDepartment().getId() : null,
+                user.getUserRole() != null ? user.getUserRole().getId() : null
         );
     }
 
     public static User mapToUser(UserDTO userDTO) {
+        Company company = null;
+        if (userDTO.getCompanyId() != null) {
+            company = new Company();
+            company.setId(userDTO.getCompanyId());
+        }
+
+        Department department = null;
+        if (userDTO.getDepartmentId() != null) {
+            department = new Department();
+            department.setId(userDTO.getDepartmentId());
+        }
+
+        UserRole userRole = null;
+        if (userDTO.getUserRoleId() != null) {
+            userRole = new UserRole();
+            userRole.setId(userDTO.getUserRoleId());
+        }
         return new User(
                 userDTO.getId(),
                 userDTO.getFirstName(),
                 userDTO.getLastName(),
                 userDTO.getEmail(),
-                userDTO.getPassword()
-                // Set company, department, userRole based on DTO
+                userDTO.getPassword(),
+                company,
+                department,
+                userRole
         );
     }
 }
