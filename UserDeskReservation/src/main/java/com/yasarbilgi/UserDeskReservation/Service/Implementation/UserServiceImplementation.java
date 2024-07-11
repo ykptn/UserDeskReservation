@@ -1,6 +1,8 @@
 package com.yasarbilgi.UserDeskReservation.Service.Implementation;
 
+import com.yasarbilgi.UserDeskReservation.DTO.LoginDTO;
 import com.yasarbilgi.UserDeskReservation.Exception.ResourceNotFoundException;
+import com.yasarbilgi.UserDeskReservation.LoginMesage;
 import com.yasarbilgi.UserDeskReservation.Mapper.UserMapper;
 import com.yasarbilgi.UserDeskReservation.Repository.UserRepository;
 import com.yasarbilgi.UserDeskReservation.DTO.UserDTO;
@@ -61,4 +63,20 @@ public class UserServiceImplementation implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
         userRepository.delete(user);
     }
+    @Override
+    public LoginMesage login(LoginDTO loginDTO) {
+        User user = userRepository.findByEmail(loginDTO.getEmail());
+        if (user != null) {
+            String password = loginDTO.getPassword();
+            String storedPassword = user.getPassword();
+            if (password.equals(storedPassword)) {
+                return new LoginMesage("Login Success", true);
+            } else {
+                return new LoginMesage("Login Failed: Incorrect password", false);
+            }
+        } else {
+            return new LoginMesage("Email not found", false);
+        }
+    }
 }
+
