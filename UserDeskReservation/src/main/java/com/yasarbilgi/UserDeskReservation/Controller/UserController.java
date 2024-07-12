@@ -49,5 +49,14 @@ public class UserController {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
-}
 
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
+        LoginMessage loginMessage = userService.login(loginDTO);
+        if (loginMessage.getStatus()) {
+            return ResponseEntity.ok(loginMessage); // Login success
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(loginMessage); // Login failed
+        }
+    }
+}
