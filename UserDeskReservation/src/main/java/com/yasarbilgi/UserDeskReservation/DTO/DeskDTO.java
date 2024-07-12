@@ -13,4 +13,3 @@ public class DeskDTO {
     private String room;
     private Boolean status;
 }
-

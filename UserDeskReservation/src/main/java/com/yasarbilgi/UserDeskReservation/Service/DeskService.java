@@ -10,5 +10,3 @@ public interface DeskService {
     DeskDTO updateDesk(Long deskId, DeskDTO updatedDesk);
     void deleteDesk(Long deskId);
 }
-
-

@@ -61,4 +61,3 @@ public class DeskServiceImplementation implements DeskService {
         deskRepository.delete(desk);
     }
 }
-

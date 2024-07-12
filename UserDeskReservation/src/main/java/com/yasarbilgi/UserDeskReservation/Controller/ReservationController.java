@@ -50,4 +50,3 @@ public class ReservationController {
         return ResponseEntity.noContent().build();
     }
 }
-

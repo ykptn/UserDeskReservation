@@ -11,4 +11,3 @@ public class CompanyDTO {
     private Long id;
     private String companyName;
 }
-

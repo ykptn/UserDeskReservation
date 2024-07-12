@@ -24,4 +24,3 @@ public class Desk {
     @Column(name = "status")
     private Boolean status;
 }
-

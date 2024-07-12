@@ -59,4 +59,3 @@ public class DepartmentServiceImplementation implements DepartmentService {
         return DepartmentMapper.mapToDepartmentDTO(department);
     }
 }
-

@@ -59,4 +59,3 @@ public class UserRoleServiceImplementation implements UserRoleService {
         return UserRoleMapper.mapToUserRoleDTO(userRole);
     }
 }
-

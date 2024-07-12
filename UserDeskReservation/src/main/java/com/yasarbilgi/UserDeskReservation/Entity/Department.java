@@ -18,4 +18,3 @@ public class Department {
     @Column(name = "department_name", nullable = false)
     private String departmentName;
 }
-

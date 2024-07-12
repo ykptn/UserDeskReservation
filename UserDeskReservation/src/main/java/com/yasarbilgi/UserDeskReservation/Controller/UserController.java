@@ -1,6 +1,8 @@
 package com.yasarbilgi.UserDeskReservation.Controller;
 
+import com.yasarbilgi.UserDeskReservation.DTO.LoginDTO;
 import com.yasarbilgi.UserDeskReservation.DTO.UserDTO;
+import com.yasarbilgi.UserDeskReservation.Message.LoginMessage;
 import com.yasarbilgi.UserDeskReservation.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,9 +56,9 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
         LoginMessage loginMessage = userService.login(loginDTO);
         if (loginMessage.getStatus()) {
-            return ResponseEntity.ok(loginMessage); // Login success
+            return ResponseEntity.ok(loginMessage);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(loginMessage); // Login failed
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(loginMessage);
         }
     }
 }

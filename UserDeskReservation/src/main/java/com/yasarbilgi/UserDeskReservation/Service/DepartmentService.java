@@ -10,4 +10,3 @@ public interface DepartmentService {
     DepartmentDTO updateDepartment(Long departmentId, DepartmentDTO updatedDepartment);
     void deleteDepartment(Long departmentId);
 }
-

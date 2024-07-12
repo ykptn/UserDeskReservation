@@ -59,4 +59,3 @@ public class CompanyServiceImplementation implements CompanyService {
         companyRepository.delete(company);
     }
 }
-
