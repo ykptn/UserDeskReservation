@@ -1,14 +1,17 @@
 package com.yasarbilgi.UserDeskReservation.Service.Implementation;
 
 import com.yasarbilgi.UserDeskReservation.DTO.LoginDTO;
+import com.yasarbilgi.UserDeskReservation.DTO.PasswordResetDTO;
 import com.yasarbilgi.UserDeskReservation.Exception.ResourceNotFoundException;
 import com.yasarbilgi.UserDeskReservation.Mapper.UserMapper;
 import com.yasarbilgi.UserDeskReservation.Message.LoginMessage;
+import com.yasarbilgi.UserDeskReservation.Message.PasswordResetMessage;
 import com.yasarbilgi.UserDeskReservation.Repository.UserRepository;
 import com.yasarbilgi.UserDeskReservation.DTO.UserDTO;
 import com.yasarbilgi.UserDeskReservation.Entity.User;
 import com.yasarbilgi.UserDeskReservation.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +26,9 @@ public class UserServiceImplementation implements UserService {
     public UserServiceImplementation(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDTO> getAllUsers() {
@@ -78,5 +84,17 @@ public class UserServiceImplementation implements UserService {
         } else {
             return new LoginMessage("Email not found", false);
         }
+    }
+    @Override
+    public PasswordResetMessage resetPassword(PasswordResetDTO passwordResetDTO) {
+        User user = userRepository.findByEmail(passwordResetDTO.getEmail());
+        if (user == null) {
+            return new PasswordResetMessage(false, "User not found!");
+        }
+
+        user.setPassword(passwordEncoder.encode(passwordResetDTO.getNewPassword()));
+        userRepository.save(user);
+
+        return new PasswordResetMessage(true, "Password successfully changed");
     }
 }

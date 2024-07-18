@@ -1,12 +1,15 @@
 package com.yasarbilgi.UserDeskReservation.Controller;
 
 import com.yasarbilgi.UserDeskReservation.DTO.LoginDTO;
+import com.yasarbilgi.UserDeskReservation.DTO.PasswordResetDTO;
 import com.yasarbilgi.UserDeskReservation.DTO.UserDTO;
 import com.yasarbilgi.UserDeskReservation.Message.LoginMessage;
+import com.yasarbilgi.UserDeskReservation.Message.PasswordResetMessage;
 import com.yasarbilgi.UserDeskReservation.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +19,9 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserController(UserService userService) {
@@ -59,6 +65,15 @@ public class UserController {
             return ResponseEntity.ok(loginMessage);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(loginMessage);
+        }
+    }
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody PasswordResetDTO passwordResetDTO) {
+        PasswordResetMessage resetMessage = userService.resetPassword(passwordResetDTO);
+        if (resetMessage.isSuccess()) {
+            return ResponseEntity.ok(resetMessage);
+        } else {
+            return ResponseEntity.badRequest().body(resetMessage);
         }
     }
 }

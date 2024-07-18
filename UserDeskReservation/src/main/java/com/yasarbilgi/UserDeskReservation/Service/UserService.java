@@ -1,8 +1,10 @@
 package com.yasarbilgi.UserDeskReservation.Service;
 
 import com.yasarbilgi.UserDeskReservation.DTO.LoginDTO;
+import com.yasarbilgi.UserDeskReservation.DTO.PasswordResetDTO;
 import com.yasarbilgi.UserDeskReservation.DTO.UserDTO;
 import com.yasarbilgi.UserDeskReservation.Message.LoginMessage;
+import com.yasarbilgi.UserDeskReservation.Message.PasswordResetMessage;
 
 import java.util.List;
 
@@ -13,4 +15,5 @@ public interface UserService {
     UserDTO updateUser(Long userId, UserDTO updatedUser);
     void deleteUser(Long userId);
     LoginMessage login(LoginDTO loginDTO);
+    PasswordResetMessage resetPassword(PasswordResetDTO passwordResetDTO);
 }
